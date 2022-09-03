@@ -57,7 +57,7 @@ function initialize(uluru) {
   var request = {
     location: pyrmont,
     radius: '500',
-    query: 'pharmacy'
+    query: 'gyms'
   };
 
   service = new google.maps.places.PlacesService(map);

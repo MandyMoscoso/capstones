@@ -1,7 +1,112 @@
 /* Set the size of the div element that contains the map */
-#map {
-    height: 400px;
+/* #map {
+    height: 400px; */
     /* The height is 400 pixels */
-    width: 100%;
+    /* width: 100%;
     /* The width is the width of the web page */
+  /* } */
+
+body{
+  background-color: #58857f;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  align-items: center;
+  height: fit-content;
+}
+.menu{   
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: right;
+
+}
+.menu-btn{
+  font-size: max(2vw,2vh);
+  width: max(10vw,10vh);
+  height: 10vh;
+  margin: 2px;
+  margin-top: 2vh;
+  /* display: flex;     */
+  text-align: center;
+}
+#sign-out{
+  margin-right: 20px;
+}
+.fit, .full, .fine{  
+    font-weight: bold; 
+    width: 100vw; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    text-align: center;
   }
+
+  @media only screen and (min-width: 760px) and (min-height: 400px){
+    /* For desktop: */
+    .fit, .full, .fine{        
+      font-size: 6vw;    
+      width: 60vw;
+      line-height: 20vh;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      margin: 20px;
+      border-radius: 20px;
+    }
+    .fit{
+      background-color: #FF9551
+    }
+    .full{
+      background-color: #6FEDD6
+    }
+    .fine{
+      background-color: #FF4A4A;
+    }
+  }
+
+  @media only screen and (min-width: 540px) {
+      /* For tablets: */
+      .fit, .full, .fine{        
+        font-size: 6vw;    
+        width: 80vw;
+        line-height: 20vh;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        margin: 10px;
+        border-radius: 20px;
+      }
+      .fit{
+        background-color: #FF9551
+      }
+      .full{
+        background-color: #6FEDD6
+      }
+      .fine{
+        background-color: #FF4A4A;
+      }
+  }
+
+  /* For mobile phones: */
+  .fit, .full, .fine{        
+    font-size: 6vw;    
+    
+    line-height: 10vh;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    margin-bottom: 5px;
+    border-radius: 20px;
+  }
+  .fit{
+    background-color: #FF9551
+  }
+  .full{
+    background-color: #6FEDD6
+  }
+  .fine{
+    background-color: #FF4A4A;
+  }
+ 
