@@ -1,44 +1,77 @@
 
-let exampleCord = {
-    coords : { 
-      latitude: 51.4554803,
-      longitude: -2.0843058,
-      altitude: null,
-      accuracy: 49,
-      altitudeAccuracy: null,
-      heading: null,
-      speed: null,
-    },
-    timestamp: 1583860898576
-  }
 
-var uluru ={};
+const nearBtn = document.getElementById('nearby');
 
+const baseUrl = "http://localhost:8888/";
 
-// console.log(successfulLookup(exampleCord))
-//get user location
-if (window.navigator.geolocation) {
-    // Geolocation available
-    navigator.geolocation.getCurrentPosition(function (position) {  
-        var current_latitude = position.coords.latitude;
-        var current_longitude = position.coords.longitude;
-        console.log(current_latitude,current_longitude)
-        initMap(current_latitude, current_longitude);
-    });
-} else {
-    initMap(54.046575, -2.8007399);
-   } 
+// const getNearbyLocation = () => {
+//   console.log("main.js clicked")
+//   axios.get(`${baseUrl}api/quotes/`)
+//   .then(res => {
+    
+//     console.log("received data")
+//   })
+// };
 
-   
-
-
-// Initialize and add the map
-function initMap(current_latitude,current_longitude) {
-    var map = new google.maps.Map(document.getElementById("map"), {
-        center: new google.maps.LatLng(current_latitude, current_longitude),
-        zoom: 12,
-        mapTypeId: 'roadmap'
-});
-console.log(current_latitude,current_longitude,"this is initmap")
-}
+const uluru = { lat: -25.344, lng: 131.031 };
+const nearBy = () =>{
   
+if (window.navigator.geolocation) {
+  // Geolocation available    
+  navigator.geolocation.getCurrentPosition(function (position) {  
+      uluru.lat = position.coords.latitude;
+      uluru.lng = position.coords.longitude;
+      initialize(uluru)
+  });
+} else (initialize(uluru))
+};
+
+// // Initialize and add the map
+// function initMap(uluru) {
+// // The location of Uluru
+
+// // The map, centered at Uluru
+// const map = new google.maps.Map(document.getElementById("map"), {
+//   zoom: 14,
+//   center: uluru,
+// });
+// // The marker, positioned at Uluru
+// const marker = new google.maps.Marker({
+//   position: uluru,
+//   map: map,
+// });
+// };
+
+var map;
+var service;
+var infowindow;
+
+function initialize(uluru) {
+  var pyrmont = new google.maps.LatLng(uluru.lat,uluru.lng);
+
+  map = new google.maps.Map(document.getElementById('map'), {
+      center: pyrmont,
+      zoom: 15
+    });
+
+  var request = {
+    location: pyrmont,
+    radius: '500',
+    query: 'pharmacy'
+  };
+
+  service = new google.maps.places.PlacesService(map);
+  service.textSearch(request, callback);
+}
+
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < 5; i++) {
+      var place = results[i];
+      console.log(results[i].name)
+      // createMarker(results[i]);
+    }
+  }
+}
+
+nearBtn.addEventListener("click", nearBy)
