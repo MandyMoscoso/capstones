@@ -49,6 +49,7 @@ body{
     text-align: center;
   }
 
+/* ------------------------------------------------------------------------- */
   @media only screen and (min-width: 760px) and (min-height: 400px){
     /* For desktop: */
     .fit, .full, .fine{        
@@ -69,7 +70,7 @@ body{
       background-color: #FF4A4A;
     }
   }
-
+/* ------------------------------------------------------------------------- */
   @media only screen and (min-width: 540px) {
       /* For tablets: */
       .fit, .full, .fine{        
@@ -90,10 +91,10 @@ body{
         background-color: #FF4A4A;
       }
   }
-
+/* ------------------------------------------------------------------------- */
   /* For mobile phones: */
   .fit, .full, .fine{        
-    font-size: 6vw;    
+    font-size: 6vw; 
     
     line-height: 10vh;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -109,4 +110,142 @@ body{
   .fine{
     background-color: #FF4A4A;
   }
- 
+ /* ------------------------------------------------------------------------- */
+/* style for log in page */
+
+#user-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 600px;
+  margin-left: 15px;
+}
+
+#user-form > input {
+  margin-bottom: 15px;
+}
+
+#user-form > button {
+  background-color: darkolivegreen;
+  border: none;
+  color: white;
+  padding: 5px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: snow;
+}
+
+header {
+  height: 80px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  color: darkslategray;
+}
+
+main {
+  display: flex; 
+  justify-content: center;
+}
+
+form {
+  width: 350px;
+  min-height: 350px;
+  background-color: darkslategray;
+  position: relative;
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-evenly; 
+  align-items: center;
+  margin: 30px;
+}
+
+form h1 {
+  color: snow;
+}
+
+button {
+  background-color: #232323;
+  width: 75px;
+  height: 25px;
+  color: turquoise;
+  border: none;
+  margin: 5px;
+}
+
+input[type='text'] {
+  width: 85%;
+  height: 30px;
+  border: none;
+  border-bottom: 2px solid #232323;
+  color: #232323;
+  background-color: snow;
+}
+
+input[type='password'] {
+  width: 85%;
+  height: 30px;
+  border: none;
+  border-bottom: 2px solid #232323;
+  color: #232323;
+  background-color: snow;
+}
+
+#user-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-card {
+  background-color: turquoise;
+  width: 300px;
+  margin: 20px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.username {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.email {
+  font-size: 15px;
+  margin: 5px 0;
+}
+
+.first-name {
+  font-size: 15px;
+  margin: 5px 0;
+}
+
+.last-name {
+  font-size: 15px;
+  margin: 5px 0;
+}
+
+
+
+.btns-container {
+  width: 100%; 
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5px;
+}
+
+.btns-container > button {
+  width: 20px;
+}
+/* ------------------------------------------------------------------------- */

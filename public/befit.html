@@ -1,19 +1,24 @@
 <html>
   <head>
     <title>Add Map</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
-    <link rel="stylesheet" type="text/css" href="./public/style.css" />
-    <script type="module" src="./public/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="./befit.css" />
+    
   </head>
   <body>
-    <h3>My Google Maps Demo</h3>
+    <h3>Let's Excersice</h3>
     <!--The div element for the map -->
     <div id="map"></div>
 
-    <button id="nearby">show me the map</button>
+    <label >
+        <input type="checkbox" class="checkbox"/>
+        <span>Only shows open now</span>
+    </label>
 
-    <a href="./public/main.html">go to landing page</a>
+
+
+    <div class = "places-container"></div>
+
+    <a href="./public/main.html">Back to Main page</a>
 
     <!-- 
      The `defer` attribute causes the callback to execute after the full HTML
@@ -21,11 +26,12 @@
      and consistent behavior across browsers, consider loading using Promises
      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
     -->
+    
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAypU-YlcxOnjjKku11CCYpTiOoDBg1qaM&libraries=places&v=weekly"
       defer
     ></script>
-    
-  </body>
+    <script src="./befit.js"></script>
+</body>
 </html>

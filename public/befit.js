@@ -1,21 +1,11 @@
 
-
-const nearBtn = document.getElementById('nearby');
-
+const placesContainer = document.querySelector('.places-container')
+const checkBox=document.querySelector('.checkbox')
+const favouriteBtn ={}
 const baseUrl = "http://localhost:8888/";
-
-// const getNearbyLocation = () => {
-//   console.log("main.js clicked")
-//   axios.get(`${baseUrl}api/quotes/`)
-//   .then(res => {
-    
-//     console.log("received data")
-//   })
-// };
-
 const uluru = { lat: -25.344, lng: 131.031 };
 const nearBy = () =>{
-  
+placesContainer.innerHTML=""
 if (window.navigator.geolocation) {
   // Geolocation available    
   navigator.geolocation.getCurrentPosition(function (position) {  
@@ -56,8 +46,8 @@ function initialize(uluru) {
 
   var request = {
     location: pyrmont,
-    radius: '500',
-    query: 'gyms'
+    radius: '10',
+    query: 'hiking'
   };
 
   service = new google.maps.places.PlacesService(map);
@@ -66,12 +56,46 @@ function initialize(uluru) {
 
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < results.length; i++) {
       var place = results[i];
-      console.log(results[i].name)
+      if(checkBox.checked === true){
+        if(place.business_status =='OPERATIONAL' && place.opening_hours.isOpen){
+          // console.log(results[i]);
+        (createPlaceCard(results[i]));}
+      } else{
+        if(place.business_status =='OPERATIONAL' ){
+          // console.log(results[i]);
+        (createPlaceCard(results[i]));}
+      }
+      
       // createMarker(results[i]);
     }
   }
 }
 
-nearBtn.addEventListener("click", nearBy)
+nearBy()
+
+
+
+//create new place
+function createPlaceCard(place) {
+  
+  let placeCard = document.createElement('div');
+  placeCard.innerHTML = `<h3>${place.name} </h3>
+  <p>Rating: ${place.rating}  <button class='favourite' id=${place.place_id} onclick="addToFavourite(${place.place_id})">Add to Favourite</button></p>
+  <p>Address: ${place.formatted_address}</p>`  
+  placesContainer.appendChild(placeCard)
+
+}
+
+checkBox.addEventListener('click', nearBy)
+const addToFavourite = (id) =>{
+  console.log("Received order add Fave")
+  axios.post(`${baseUrl}api/fitfavourite`,id)
+    .then(res=>{
+      console.log('received resonse from server -befit.js')
+    })
+};
+
+
+
