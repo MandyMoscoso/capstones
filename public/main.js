@@ -2,10 +2,11 @@
 const logIn = document.querySelector('.log-in')
 const loginForm = document.querySelector('#login-form')
 const registerForm = document.querySelector('#register-form')
-
+let userid = ''
 const baseURL = `http://localhost:8888/api`
 
 const login = body => axios.post(`${baseURL}/login`, body).then( res => {  
+  // console.log(res.data)
   loginSuccess(res.data)
 }).catch(err => {
   console.log(err)
@@ -75,6 +76,8 @@ function registerSuccess(data) {
 }
 
 function loginSuccess(data) {
+  userid = data;
+  console.log(typeof userid)
   logIn.innerHTML = ''
   const newLogIn = document.createElement('div')  
   newLogIn.innerHTML = `<
@@ -83,7 +86,7 @@ function loginSuccess(data) {
       <div class="menu-btn" id ="sign-out">Sign Out</div>
   </nav>
   <div class="container">
-      <div class = "fit">BE FIT</div>
+  <div class = "fit"><a href="befit.html">BE FIT</a></div>
       <div class = "full">BE FULL</div>
       <div class = "fine">BE FINE</div>
   </div>  

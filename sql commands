@@ -16,3 +16,6 @@ CREATE TABLE fit_table (
 INSERT INTO users(user_firstname,user_lastname)
 VALUES ('John', 'Doe'),
 ('Jane', 'Greens');
+
+INSERT INTO fit_table (user_id, location_name, location_address, location_id, opening_hrs)
+VALUES ('2', 'My Home','123 h st', 'local1', '1pm');

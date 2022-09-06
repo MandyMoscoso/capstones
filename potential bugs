@@ -1,0 +1,4 @@
+some google address may cause issue with sequelizer
+some address when add to favourite will case the server to crash. need to handle that
+
+sometimes browser will show google is not defined. need to refresh page to make it works

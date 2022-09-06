@@ -12,7 +12,7 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 })
 const bcrypt = require('bcryptjs');
 
-let user_id = "";
+
 
 
 
@@ -31,16 +31,15 @@ module.exports = {
               for (let i = 0; i < users.length; i++) {
       
                 if (users[i].username == username && bcrypt.compareSync(password, users[i].user_password)) {
-                  console.log(users[i]);
-                  user_id = username;
-                  console.log("user name after log in is", user_id)
-                  return res.status(200).send(users[i])
+                  let userid = users[i].user_id
+                  console.log(userid);                
+                  return res.status(200).send(`${userid}`)
                 }
               }
               res.status(400).send("User not found.")
               
           });
-      console.log("this is user array",users)
+      
     
     
   },
@@ -61,7 +60,12 @@ module.exports = {
             },
 
   addFitFavourite:(req,res) =>{
-    console.log("this is controller")  
+    // console.log(req.body)  
+    const{name,  formatted_address,place_id} = req.body;
+    console.log(name)
+    sequelize.query(`INSERT INTO fit_table (user_id, location_name, location_address, location_id)
+    VALUES ('3', '${name}','${formatted_address}', '${place_id}')
+    `)
     res.status(200).send("updated on server side")
   }
 }

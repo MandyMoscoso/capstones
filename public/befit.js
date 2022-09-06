@@ -76,7 +76,7 @@ const addToFavourite = (id) =>{
     console.log(id)
     let request = {
       placeId: id,
-      fields: ['name', 'rating', 'formatted_phone_number', 'formatted_address','icon','place_id','opening_hours']
+      fields: ['name', 'rating', 'formatted_phone_number', 'formatted_address','icon','place_id']
     };
     service = new google.maps.places.PlacesService(map);
     service.getDetails(request, callback); 
