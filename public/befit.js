@@ -83,7 +83,8 @@ const addToFavourite = (id) =>{
     
     function callback(place, status) {
       if (status == google.maps.places.PlacesServiceStatus.OK) {
-        place.user = document.cookie;
+        place.username = document.cookie;
+        place.category = 'befit'
         console.log(place)
         axios.post(`${baseUrl}api/fitfavourite`,place)
   .then(res=>{
