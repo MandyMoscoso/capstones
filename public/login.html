@@ -8,54 +8,61 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class = "log-in">
+<body>
+    <div class = "log-in">
     <header>
         <h1>Login or Register</h1>
     </header>
     <main>
+        <div class="login">
+            <form id="login-form">
+                <h1>Log In</h1>
+                <input 
+                    type='text'
+                    id="login-username"
+                    placeholder="Username"/>
+                <input 
+                    type='password'
+                    id="login-password"
+                    placeholder='Password'/>
+                <button>Sign In</button>
+            </form>
+        </div>
 
-    <form id="login-form">
-        <h1>Log In</h1>
-        <input 
-            type='text'
-            id="login-username"
-            placeholder="Username"/>
-        <input 
-            type='password'
-            id="login-password"
-            placeholder='Password'/>
-        <button>Sign In</button>
-    </form>
-    <form id="register-form">
-      <h1>Register</h1>
-      <input 
-          type='text'
-          id="register-username"
-          placeholder="Username"/>
-      <input 
-          type='text'
-          id="register-email"
-          placeholder='Email'/>
-      <input 
-          type='text'
-          id="register-firstName"
-          placeholder='First Name'/>
-      <input 
-          type='text'
-          id="register-lastName"
-          placeholder='Last Name'/>
-      <input 
-          type='password'
-          id="register-password"
-          placeholder='Password'/>
-      <input 
-          type='password'
-          id="register-password-2"
-          placeholder='Confirm Password'/>
-      <button>Register</button>
-  </form>
+        <div class = 'register'>
+            <form id="register-form">
+            <h1>Register</h1>
+            <input 
+                type='text'
+                id="register-username"
+                placeholder="Username"/>
+            <input 
+                type='text'
+                id="register-email"
+                placeholder='Email'/>
+            <input 
+                type='text'
+                id="register-firstName"
+                placeholder='First Name'/>
+            <input 
+                type='text'
+                id="register-lastName"
+                placeholder='Last Name'/>
+            <input 
+                type='password'
+                id="register-password"
+                placeholder='Password'/>
+            <input 
+                type='password'
+                id="register-password-2"
+                placeholder='Confirm Password'/>
+            <button>Register</button>
+        </form>
+</div>
 
-    <section id="user-info"></section>
+</main>
+    
+</div>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="main.js"></script>

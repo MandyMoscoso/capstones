@@ -1,18 +1,19 @@
 // functions for log in page
-const userContainer = document.querySelector('#user-info')
+const logIn = document.querySelector('.log-in')
 const loginForm = document.querySelector('#login-form')
 const registerForm = document.querySelector('#register-form')
 
 const baseURL = `http://localhost:8888/api`
 
-const login = body => axios.post(`${baseURL}/login`, body).then( res => {
-  createUserCard(res.data)
+const login = body => axios.post(`${baseURL}/login`, body).then( res => {  
+  loginSuccess(res.data)
 }).catch(err => {
   console.log(err)
-  alert('Uh oh. Your request did not work.')
+  alert('Please check your username and password')
 })
 const register = body => axios.post(`${baseURL}/register`, body).then(res => {
-  createUserCard(res.data)
+  console.log("registered")
+  registerSuccess(res.data)
 }).catch(err => {
   console.log(err)
   alert('Uh oh. Your request did not work.')
@@ -68,19 +69,26 @@ function registerSubmitHandler(e) {
   password2.value = ''
 }
 
-function createUserCard(data) {
-    userContainer.innerHTML = ''
-    const userCard = document.createElement('div')
-    userCard.classList.add('user-card')
+function registerSuccess(data) {
+  document.querySelector('h1').innerHTML = `<p class = "welcome" >Welcome ${data.firstName} ${data.lastName}`
+    document.querySelector(".register").innerHTML = ''
+}
 
-    userCard.innerHTML = `<p class="username">Username: ${data.username}</p>
-    <p class="email">Email: ${data.email}</p>
-    <p class="first-name">First Name: ${data.firstName}</p>
-    <p class="last-name">Last Name: ${data.lastName}</p>
-    `
-
-
-    userContainer.appendChild(userCard)
+function loginSuccess(data) {
+  logIn.innerHTML = ''
+  const newLogIn = document.createElement('div')  
+  newLogIn.innerHTML = `<
+  <nav class ='menu'> 
+      <div class = "menu-btn" id="my-profile">My Profile</div>
+      <div class="menu-btn" id ="sign-out">Sign Out</div>
+  </nav>
+  <div class="container">
+      <div class = "fit">BE FIT</div>
+      <div class = "full">BE FULL</div>
+      <div class = "fine">BE FINE</div>
+  </div>  
+  `
+  logIn.appendChild(newLogIn)
 }
 
 loginForm.addEventListener('submit', loginSubmitHandler)
