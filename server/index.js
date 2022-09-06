@@ -14,12 +14,17 @@ const {addFitFavourite,
 
 } = require('./controller')
 
-
+const addFave = (req,res) =>{
+    console.log("hi this is server")
+    console.log(req.body)
+}
 
 const port = process.env.PORT || 8888;
 app.post(`/api/login`, login)
 app.post(`/api/register`, register)
-app.post("/api/fitfavourite", addFitFavourite);
+// app.post("/api/fitfavourite", addFitFavourite);
+app.post("/api/fitfavourite", addFave);
+
 
 
 

@@ -61,7 +61,7 @@ module.exports = {
             },
 
   addFitFavourite:(req,res) =>{
-    console.log(req.body)  
+    console.log("this is controller")  
     res.status(200).send("updated on server side")
   }
 }

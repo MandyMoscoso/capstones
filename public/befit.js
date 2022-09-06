@@ -57,27 +57,41 @@ function callback(results, status) {
 
 nearBy()
 
-
-
 //create new place
 function createPlaceCard(place) {
   
   let placeCard = document.createElement('div');
   placeCard.innerHTML = `<h3>${place.name} </h3>
-  <p>Rating: ${place.rating}  <button class='favourite' id=${place.place_id} onclick="addToFavourite(${place.place_id})">Add to Favourite</button></p>
+  <p>Rating: ${place.rating}  <button class='favourite' id=${place.place_id} onclick="addToFavourite('${place.place_id}')">Add to Favourite</button type="button"></p>
   <p>Address: ${place.formatted_address}</p>`  
   placesContainer.appendChild(placeCard)
 
 }
 
-checkBox.addEventListener('click', nearBy)
+checkBox.addEventListener('click', nearBy);
+
 const addToFavourite = (id) =>{
-  console.log("Received order add Fave")
-  axios.post(`${baseUrl}api/fitfavourite`,id)
-    .then(res=>{
+  
+     
+    console.log(id)
+    let request = {
+      placeId: id,
+      fields: ['name', 'rating', 'formatted_phone_number', 'formatted_address','icon','place_id','opening_hours']
+    };
+    service = new google.maps.places.PlacesService(map);
+    service.getDetails(request, callback); 
+    
+    function callback(place, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        console.log(place);
+        axios.post(`${baseUrl}api/fitfavourite`,place)
+  .then(res=>{
       console.log('received resonse from server -befit.js')
     })
+      }
+    }    
+    
+ 
+  
+  
 };
-
-
-
