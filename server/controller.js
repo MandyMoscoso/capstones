@@ -61,10 +61,10 @@ module.exports = {
 
   addFitFavourite:(req,res) =>{
     // console.log(req.body)  
-    const{name,  formatted_address,place_id} = req.body;
+    const{name,  formatted_address,place_id, user} = req.body;
     console.log(name)
     sequelize.query(`INSERT INTO fit_table (user_id, location_name, location_address, location_id)
-    VALUES ('3', '${name}','${formatted_address}', '${place_id}')
+    VALUES ('${user}', '${name}','${formatted_address}', '${place_id}')
     `)
     res.status(200).send("updated on server side")
   }

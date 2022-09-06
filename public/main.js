@@ -76,8 +76,8 @@ function registerSuccess(data) {
 }
 
 function loginSuccess(data) {
-  userid = data;
-  console.log(typeof userid)
+  document.cookie = data;
+  
   logIn.innerHTML = ''
   const newLogIn = document.createElement('div')  
   newLogIn.innerHTML = `<
