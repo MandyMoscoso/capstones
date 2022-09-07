@@ -1,14 +1,35 @@
-body{
-    background-color: #58857f;
-    width: fit-content;
-    height: fit-content;
-    margin: auto;
+
+
+  body{
+    width: 80vw;
+    margin-left: 10vw;    
   }
 
-.places-container{
-    width : 90vw;
-}
+  .main-header{
+    font-size: 50px;
+    font-weight: bold;
+    color: #16213E;    
+  }
 
+  .menu{   
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: right;
+    
+  }
+  .menu-btn{
+    font-size: max(2vw,2vh);
+    width: max(10vw,10vh);
+    height: 10vh;
+    margin: 2px;
+    margin-top: 2vh;
+    /* display: flex;     */
+    text-align: center;
+  }
+  #sign-out{
+    margin-right: 20px;
+  }
 
 .checkbox {
     display: inline-flex;
@@ -53,4 +74,13 @@ body{
 
 .checkbox > input:active {
     border: 2px solid #34495E;
+}
+
+.fave-header{
+    font-size: 30px;
+    text-align: center;
+}
+.favourite{
+    font-size: 15px;
+    text-align: center;
 }

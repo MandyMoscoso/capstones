@@ -76,25 +76,32 @@ function registerSuccess(data) {
 }
 
 function loginSuccess(data) {
-  document.cookie = data;
+  document.cookie = `username=${data}`;
   
   logIn.innerHTML = ''
   const newLogIn = document.createElement('div')  
-  newLogIn.innerHTML = `<
+  newLogIn.innerHTML = `
   <nav class ='menu'> 
       <div class = "menu-btn" id="my-profile">My Profile</div>
-      <div class="menu-btn" id ="sign-out">Sign Out</div>
+      <div class="menu-btn" id ="sign-out" onclick="signOut()">Sign Out</div>
   </nav>
   <div class="container">
-  <div class = "fit"><a href="befit.html">BE FIT</a></div>
-      <div class = "full">BE FULL</div>
-      <div class = "fine">BE FINE</div>
+  <div class = "fit" onclick="myFunction('befit')">BE FIT</div>
+      <div class = "full" onclick="myFunction(befull)">BE FULL</div>
+      <div class = "fine" onclick="myFunction(befine)">BE FINE</div>
   </div>  
   `
   logIn.appendChild(newLogIn)
+}
+function myFunction(target) {
+  location.replace(`${target}.html`)
 }
 
 loginForm.addEventListener('submit', loginSubmitHandler)
 registerForm.addEventListener('submit', registerSubmitHandler)
 // ------------------------------------------------------------------------------
 
+const signOut = () =>{
+  document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  location.replace(`login.html`);
+}

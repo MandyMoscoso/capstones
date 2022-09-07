@@ -10,21 +10,23 @@ app.use(cors())
 
 const {addFitFavourite,
     login,
-    register
+    register,
+    showFave,
+    removeFavourite
 
 } = require('./controller')
 
-// const addFave = (req,res) =>{
-//     console.log("hi this is server")
-//     console.log(req.body)
-// }
+
 
 const port = process.env.PORT || 8888;
+app.get("/api/showfavourite/:username", showFave);
 app.post(`/api/login`, login)
 app.post(`/api/register`, register)
 app.post("/api/fitfavourite", addFitFavourite);
 // app.post("/api/fitfavourite", addFave);
 
+
+app.put(`/api/fitfavourite/`, removeFavourite)
 
 
 

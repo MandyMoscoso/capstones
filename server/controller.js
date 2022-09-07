@@ -49,12 +49,14 @@ module.exports = {
       const passHash = bcrypt.hashSync(password,salt);
       // console.log(password);
           sequelize.query(`CREATE TABLE ${username} (
+            item_id SERIAL PRIMARY KEY,
             location_name VARCHAR,
             location_address VARCHAR,
             location_id VARCHAR,
-            opening_hrs VARCHAR,
-            username VARCHAR  REFERENCES users (username),
-            category VARCHAR
+            opening_hrs VARCHAR,            
+            category VARCHAR,
+            username VARCHAR  REFERENCES users (username)
+            
         );`);
           sequelize.query(`INSERT INTO users (username, password, email, firstname, lastname)
           VALUES ('${username}', '${passHash}','${email}', '${firstName}', '${lastName}')`)
@@ -72,5 +74,23 @@ module.exports = {
     sequelize.query(`INSERT INTO ${username} (username, location_name, location_address, location_id, category) VALUES ('${username}', '${name}','${formatted_address}', '${place_id}', '${category}')
     `)
     res.status(200).send("updated on server side")
-  }
+  },
+
+  showFave: (req,res) =>{
+    console.log(req.params.username)
+    sequelize.query(`SELECT * FROM ${req.params.username} WHERE category = 'befit'`)
+      .then(dbRes =>{
+        res.status(200).send(dbRes[0]);
+        console.log('res sent')
+      }
+
+      )
+  },
+   removeFavourite : (req,res)=>{        
+    console.log(req.body)
+    let {id, username} = req.body;
+    id = id*1;
+    sequelize.query(`DELETE FROM ${username} WHERE item_id = ${id}`)
+    .then (dbRes => res.status(200).send("item removed"))
+}
 }

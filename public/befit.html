@@ -5,10 +5,15 @@
     
   </head>
   <body>
-    <h3>Let's Excersice</h3>
+    <nav class ='menu'> 
+      <div class = "menu-btn" id="my-profile">My Profile</div>
+      <div class="menu-btn" id ="sign-out">Sign Out</div>
+  </nav>
+    <h3 class="main-header">Let's Excersice</h3>
     <!--The div element for the map -->
     <div id="map"></div>
-
+    <div class = 'fave-header'></div>
+    <div class = 'favourite'></div>
     <label >
         <input type="checkbox" class="checkbox"/>
         <span>Only shows open now</span>
@@ -18,7 +23,7 @@
 
     <div class = "places-container"></div>
 
-    <a href="./public/main.html">Back to Main page</a>    
+    <a href="./login.html">Back to Main page</a>    
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAypU-YlcxOnjjKku11CCYpTiOoDBg1qaM&libraries=places&v=weekly"
