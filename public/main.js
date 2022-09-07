@@ -87,8 +87,8 @@ function loginSuccess(data) {
   </nav>
   <div class="container">
   <div class = "fit" onclick="myFunction('befit')">BE FIT</div>
-      <div class = "full" onclick="myFunction(befull)">BE FULL</div>
-      <div class = "fine" onclick="myFunction(befine)">BE FINE</div>
+      <div class = "full" onclick="myFunction('befull')">BE FULL</div>
+      <div class = "fine" onclick="myFunction('befine')">BE FINE</div>
   </div>  
   `
   logIn.appendChild(newLogIn)
