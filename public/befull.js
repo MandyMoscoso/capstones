@@ -49,7 +49,7 @@ function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
-      
+      // console.log( place.photos[0].getUrl({maxWidth:640}))
       if(checkBox.checked === true){
         if(place.business_status =='OPERATIONAL' && place.opening_hours!=undefined && place.opening_hours.isOpen){
          
@@ -71,8 +71,14 @@ function callback(results, status) {
 function createPlaceCard(place) {
   
   let placeCard = document.createElement('div');
-  placeCard.innerHTML = `<h3 class ="name">${place.name} </h3>
-  <p class = "rating">Rating: ${place.rating}  <button class='favourite' id=${place.place_id} onclick="addToFavourite('${place.place_id}')">Add to Favourite</button type="button"></p>
+  placeCard.classList.add('place-card')
+  var placePhotoUrl;
+  if(place.photos===undefined){
+    placePhotoUrl="https://images.unsplash.com/photo-1612178537253-bccd437b730e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Ymxhbmt8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+  }else{ placePhotoUrl = place.photos[0].getUrl(); }
+  placeCard.innerHTML = ` <img src= ${placePhotoUrl}>
+  <h3 class ="name">${place.name} </h3>
+  <p class = "rating">Rating: ${place.rating}  <button class='favourite' id=${place.place_id} onclick="addToFavourite('${place.place_id}','${placePhotoUrl}')">Add to Favourite</button type="button"></p>
   <p class = "address">Address: ${place.formatted_address}</p>`  
   return placeCard
 
@@ -86,7 +92,7 @@ const getCookie = (name)=> {
 function pageStarter(){  
   let username = getCookie('username')
   if(username==undefined){
-    console.log('please log in')
+    // console.log('please log in')
     myFave.innerHTML = "Please log in";
     document.querySelector("h3").innerHTML = "";
     document.querySelector('label').innerHTML=''
@@ -97,12 +103,13 @@ function pageStarter(){
     .then (res =>{
       myFave.innerHTML="";
       let data = res.data;
-     
+      
       for(let i =0; i <data.length; i++){      
             
         let placeCard = document.createElement('div');
         placeCard.classList.add('fave-item')
-        placeCard.innerHTML = `<h3 class="fave-name">${data[i].location_name} </h3>      
+        placeCard.innerHTML = `<img src= ${data[i].photo}>
+        <h3 class="fave-name">${data[i].location_name} </h3>      
         <p class="fave-address">Address: ${data[i].location_address}</p>
         <button class='delete' id=${data[i].item_id} onclick="remove('${data[i].item_id}')">Remove from Favourite</button type="button"></p>`          
         myFave.appendChild(placeCard)
@@ -115,8 +122,8 @@ function pageStarter(){
 
 checkBox.addEventListener('click', nearBy);
 
-const addToFavourite = (id) =>{      
-    // console.log(id)
+const addToFavourite = (id,photo) =>{      
+    console.log(id)
     let request = {
       placeId: id,
       fields: ['name', 'rating', 'formatted_phone_number', 'formatted_address','icon','place_id']
@@ -128,7 +135,9 @@ const addToFavourite = (id) =>{
       let username = getCookie('username')
       if (status == google.maps.places.PlacesServiceStatus.OK) {
         place.username = username;
-        place.category = 'befull'
+        place.category = 'befull';        
+        place.photo = photo;
+        console.log(place)
        
         axios.post(`${baseUrl}api/addfavourite`,place)
   .then(res=>{

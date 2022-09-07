@@ -13,6 +13,9 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 const bcrypt = require('bcryptjs');
 
 
+const escapeQuote=(str) =>{
+   return str.replace(`'`, `''`)
+}
 
 
 
@@ -48,6 +51,12 @@ module.exports = {
       //The hash represents the actual encryption of our password.
       const passHash = bcrypt.hashSync(password,salt);
       // console.log(password);
+      let bodyKeys = Object.keys(req.body);    
+    for(let i of bodyKeys){
+      if((typeof req.body[i]) == 'string'){
+        req.body[i] = escapeQuote(req.body[i])
+      }   
+    }
           sequelize.query(`CREATE TABLE ${username} (
             item_id SERIAL PRIMARY KEY,
             location_name VARCHAR,
@@ -55,6 +64,7 @@ module.exports = {
             location_id VARCHAR,
             opening_hrs VARCHAR,            
             category VARCHAR,
+            photo VARCHAR,
             username VARCHAR  REFERENCES users (username)
             
         );`);
@@ -68,36 +78,60 @@ module.exports = {
             },
 
   addFavourite:(req,res) =>{
-    // console.log(req.body)  
-    const{name, formatted_address,place_id, username, category} = req.body;
-    console.log(name)
-    sequelize.query(`INSERT INTO ${username} (username, location_name, location_address, location_id, category) VALUES ('${username}', '${name}','${formatted_address}', '${place_id}', '${category}')
+    
+    let bodyKeys = Object.keys(req.body);    
+    for(let i of bodyKeys){
+      if((typeof req.body[i]) == 'string'){
+        req.body[i] = escapeQuote(req.body[i])
+      }   
+    }
+    const{name, formatted_address,place_id, username, category, photo} = req.body;    
+    
+    sequelize.query(`INSERT INTO ${username} (username, location_name, location_address, location_id, category, photo) VALUES ('${username}', '${name}','${formatted_address}', '${place_id}', '${category}', '${photo}')
     `)
     res.status(200).send("updated on server side")
   },
   
   showFitFave: (req,res) =>{
-    console.log(req.params.username)
+    // console.log(req.params.username)
+    let bodyKeys = Object.keys(req.params);    
+    for(let i of bodyKeys){
+      if((typeof req.params[i]) == 'string'){
+        req.params[i] = escapeQuote(req.params[i])
+      }   
+    }
     sequelize.query(`SELECT * FROM ${req.params.username} WHERE category = 'befit'`)
       .then(dbRes =>{
         res.status(200).send(dbRes[0]);
         console.log('res sent')
       }
-
       )
   },
+
   showFullFave: (req,res) =>{
-    console.log(req.params.username)
+    // console.log(req.params.username)
+    let bodyKeys = Object.keys(req.params);    
+    for(let i of bodyKeys){
+      if((typeof req.params[i]) == 'string'){
+        req.params[i] = escapeQuote(req.params[i])
+      }   
+    }
     sequelize.query(`SELECT * FROM ${req.params.username} WHERE category = 'befull'`)
       .then(dbRes =>{
         res.status(200).send(dbRes[0]);
-        console.log('res sent')
+        
       }
-
       )
   },
+
   showFineFave: (req,res) =>{
-    console.log(req.params.username)
+    // console.log(req.params.username)
+    let bodyKeys = Object.keys(req.params);    
+    for(let i of bodyKeys){
+      if((typeof req.params[i]) == 'string'){
+        req.params[i] = escapeQuote(req.params[i])
+      }   
+    }
     sequelize.query(`SELECT * FROM ${req.params.username} WHERE category = 'befine'`)
       .then(dbRes =>{
         res.status(200).send(dbRes[0]);
@@ -110,7 +144,13 @@ module.exports = {
     console.log(req.body)
     let {id, username} = req.body;
     id = id*1;
+    let bodyKeys = Object.keys(req.body);    
+    for(let i of bodyKeys){
+      if((typeof req.body[i]) == 'string'){
+        req.body[i] = escapeQuote(req.body[i])
+      }   
+    }
     sequelize.query(`DELETE FROM ${username} WHERE item_id = ${id}`)
     .then (dbRes => res.status(200).send("item removed"))
-}
+},
 }

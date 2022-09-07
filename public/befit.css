@@ -22,17 +22,24 @@
   }
   .menu{
     color: rgb(0, 0, 0);
-    text-decoration: none;
-    margin: 0px 20px;
+    text-decoration: none;    
     font-size: 1.3em;
     display: flex;
     flex-direction: row;
-    padding-left: 70%;
+    
+   
+  }
+  .main-menu{
+    margin-right: 50vw;
+    white-space:nowrap;
+   
   }
   .menu-btn{
     font-size: 20px;
-    padding-left: 20px;
-    padding-bottom: 20px;;
+    padding-left: 50px;
+    padding-bottom: 20px;
+    width: 200px;
+    white-space:nowrap;
   }
   #sign-out{
     margin-right: 20px;
@@ -100,8 +107,23 @@
  #map {
     height: 30%;
   }
-  
-  /* 
-   * Optional: Makes the sample page fill the window. 
-   */
- 
+  a{
+    text-decoration: none;
+  }
+
+  img{
+    width: 425px;
+    height: 184px;
+    object-fit: cover;
+  }
+  .place-card, .fave-item{
+    width: 425px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 5px;
+    margin: 20;
+  }
+  .places-container, .favourite{
+    display: flex;
+    flex-wrap: wrap;
+  }
