@@ -49,14 +49,15 @@ function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
+    
       if(checkBox.checked === true){
-        if(place.business_status =='OPERATIONAL' && place.opening_hours.isOpen){
-          // console.log(results[i]);
-        (createPlaceCard(results[i]));}
+        if(place.business_status =='OPERATIONAL' && place.opening_hours!=undefined && place.opening_hours.isOpen){
+         
+          placesContainer.appendChild((createPlaceCard(place)))  ;}
       } else{
         if(place.business_status =='OPERATIONAL' ){
-          // console.log(results[i]);
-          placesContainer.appendChild((createPlaceCard(results[i])))        
+        
+          placesContainer.appendChild((createPlaceCard(place)))        
         
       }
       }
@@ -92,7 +93,7 @@ function pageStarter(){
 
   } else{
     
-    axios.get (`${baseUrl}api/showfavourite/${username}`)
+    axios.get (`${baseUrl}api/showfinefavourite/${username}`)
     .then (res =>{
       myFave.innerHTML="";
       let data = res.data;
@@ -127,9 +128,9 @@ const addToFavourite = (id) =>{
       let username = getCookie('username')
       if (status == google.maps.places.PlacesServiceStatus.OK) {
         place.username = username;
-        place.category = 'befit'
+        place.category = 'befine'
        
-        axios.post(`${baseUrl}api/fitfavourite`,place)
+        axios.post(`${baseUrl}api/addfavourite`,place)
   .then(res=>{
       pageStarter();
     })
@@ -140,7 +141,7 @@ const addToFavourite = (id) =>{
 
 const remove = (location) =>{  
   let username = getCookie('username') 
-        axios.put(`${baseUrl}api/fitfavourite/`,{id: location, username: username} )
+        axios.put(`${baseUrl}api/removefavourite/`,{id: location, username: username} )
 .then(res=>{
     pageStarter();
   })

@@ -49,14 +49,15 @@ function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
+      // console.log(place)
       if(checkBox.checked === true){
-        if(place.business_status =='OPERATIONAL' && place.opening_hours.isOpen){
-          // console.log(results[i]);
-        (createPlaceCard(results[i]));}
+        if(place.business_status =='OPERATIONAL' && place.opening_hours!=undefined && place.opening_hours.isOpen){
+         
+          placesContainer.appendChild((createPlaceCard(place)))  ;}
       } else{
         if(place.business_status =='OPERATIONAL' ){
-          // console.log(results[i]);
-          placesContainer.appendChild((createPlaceCard(results[i])))        
+        
+          placesContainer.appendChild((createPlaceCard(place)))         
         
       }
       }
@@ -92,7 +93,7 @@ function pageStarter(){
 
   } else{
     
-    axios.get (`${baseUrl}api/showfavourite/${username}`)
+    axios.get (`${baseUrl}api/showfitfavourite/${username}`)
     .then (res =>{
       myFave.innerHTML="";
       let data = res.data;
@@ -129,7 +130,7 @@ const addToFavourite = (id) =>{
         place.username = username;
         place.category = 'befit'
        
-        axios.post(`${baseUrl}api/fitfavourite`,place)
+        axios.post(`${baseUrl}api/addfavourite`,place)
   .then(res=>{
       pageStarter();
     })

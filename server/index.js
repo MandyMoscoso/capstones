@@ -8,10 +8,13 @@ const path = require('path')
 app.use(express.json())
 app.use(cors())
 
-const {addFitFavourite,
+const {addFavourite,
     login,
     register,
-    showFave,
+    showFitFave,
+    showFullFave,
+    showFineFave,
+   
     removeFavourite
 
 } = require('./controller')
@@ -19,14 +22,17 @@ const {addFitFavourite,
 
 
 const port = process.env.PORT || 8888;
-app.get("/api/showfavourite/:username", showFave);
+app.get("/api/showfitfavourite/:username", showFitFave);
+app.get("/api/showfullfavourite/:username", showFullFave);
+app.get("/api/showfinefavourite/:username", showFineFave);
 app.post(`/api/login`, login)
 app.post(`/api/register`, register)
-app.post("/api/fitfavourite", addFitFavourite);
+app.post("/api/addfavourite", addFavourite);
+
 // app.post("/api/fitfavourite", addFave);
 
 
-app.put(`/api/fitfavourite/`, removeFavourite)
+app.put(`/api/removefavourite/`, removeFavourite)
 
 
 

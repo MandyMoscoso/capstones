@@ -67,7 +67,7 @@ module.exports = {
              
             },
 
-  addFitFavourite:(req,res) =>{
+  addFavourite:(req,res) =>{
     // console.log(req.body)  
     const{name, formatted_address,place_id, username, category} = req.body;
     console.log(name)
@@ -75,10 +75,30 @@ module.exports = {
     `)
     res.status(200).send("updated on server side")
   },
-
-  showFave: (req,res) =>{
+  
+  showFitFave: (req,res) =>{
     console.log(req.params.username)
     sequelize.query(`SELECT * FROM ${req.params.username} WHERE category = 'befit'`)
+      .then(dbRes =>{
+        res.status(200).send(dbRes[0]);
+        console.log('res sent')
+      }
+
+      )
+  },
+  showFullFave: (req,res) =>{
+    console.log(req.params.username)
+    sequelize.query(`SELECT * FROM ${req.params.username} WHERE category = 'befull'`)
+      .then(dbRes =>{
+        res.status(200).send(dbRes[0]);
+        console.log('res sent')
+      }
+
+      )
+  },
+  showFineFave: (req,res) =>{
+    console.log(req.params.username)
+    sequelize.query(`SELECT * FROM ${req.params.username} WHERE category = 'befine'`)
       .then(dbRes =>{
         res.status(200).send(dbRes[0]);
         console.log('res sent')
