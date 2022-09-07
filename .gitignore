@@ -1,5 +1,5 @@
 node_modules
 .env
-planning
-sql commands
-potential bugs
+planning.txt
+sql-commands.txt
+potential-bugs.txt
