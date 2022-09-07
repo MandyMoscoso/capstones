@@ -18,11 +18,11 @@ if (window.navigator.geolocation) {
 } else (initialize(uluru))
 };
 
-var map;
-var service;
-var infowindow;
 
 function initialize(uluru) {
+  var map;
+  var service;
+  var infowindow;
   var pyrmont = new google.maps.LatLng(uluru.lat,uluru.lng);
 
   map = new google.maps.Map(document.getElementById('map'), {
@@ -38,6 +38,11 @@ function initialize(uluru) {
 
   service = new google.maps.places.PlacesService(map);
   service.textSearch(request, callback);
+  const marker = new google.maps.Marker({
+    position: uluru,
+    map: map,
+  });
+
 }
 
 function callback(results, status) {
