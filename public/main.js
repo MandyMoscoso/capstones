@@ -2,7 +2,8 @@
 const logIn = document.querySelector('.log-in')
 const loginForm = document.querySelector('#login-form')
 const registerForm = document.querySelector('#register-form')
-let userid = ''
+let userid = '';
+const signoutBtn = document.querySelector('#sign-out')
 const baseURL = `http://localhost:8888/api`
 
 const login = body => axios.post(`${baseURL}/login`, body).then( res => {  
@@ -96,9 +97,12 @@ function loginSuccess(data) {
 function myFunction(target) {
   location.replace(`${target}.html`)
 }
-
-loginForm.addEventListener('submit', loginSubmitHandler)
-registerForm.addEventListener('submit', registerSubmitHandler)
+if(loginForm){
+  loginForm.addEventListener('submit', loginSubmitHandler)
+}
+if(registerForm){
+  registerForm.addEventListener('submit', registerSubmitHandler)
+}
 // ------------------------------------------------------------------------------
 
 const signOut = () =>{
