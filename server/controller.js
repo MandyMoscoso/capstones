@@ -152,7 +152,7 @@ module.exports = {
 },
 
 getUser: (req,res) =>{
-  console.log(req.params)
+  // console.log(req.params)
   let bodyKeys = Object.keys(req.params);    
   for(let i of bodyKeys){
     if((typeof req.params[i]) == 'string'){
@@ -162,10 +162,34 @@ getUser: (req,res) =>{
   sequelize.query(`SELECT username, firstname, lastname, email FROM users WHERE username = '${req.params.username}'`)
     .then(dbRes =>{
       res.status(200).send(dbRes[0]);
-      console.log('res sent')
+      // console.log('res sent')
     }
     )
 },
 
+editUser: (req,res) =>{
+  console.log(req.body)
+  
+  let bodyKeys = Object.keys(req.body);    
+  for(let i of bodyKeys){
+    if((typeof req.body[i]) == 'string'){
+      req.body[i] = escapeQuote(req.body[i])
+    }   
+  }
 
+  sequelize.query(`UPDATE users SET ${req.body.item} = '${req.body.newvalue}' WHERE username = '${req.body.username}'`)
+  .then( dbRes =>{
+    if(res.status(200)){
+      sequelize.query(`SELECT username, firstname, lastname, email FROM users WHERE username = '${req.body.username}'`)
+    .then(dbRes =>{
+      res.status(200).send(dbRes[0]);
+      // console.log('res sent')
+    }
+    )
+    }
+    
+  }
+
+  )
+}
 }
