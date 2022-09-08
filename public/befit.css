@@ -1,39 +1,55 @@
   body{
     width: 80vw;
-    margin-left: 10vw;    
+    margin-left: 10vw;  
+    background-color: #d2d9e0;  
   }
-
-  .main-header{
-    font-size: 50px;
-    font-weight: bold;
-    color: #16213E;    
-  }
+  a, a:visited,  a:hover{
+    background-color:transparent; 
+    text-decoration:none;
+    color: black;
+}
+.top-container{
+  position: sticky;
+  
+  
+}
+#map {
+  height: 30%;  
+  align-items: center;
+  width: 105%;
+}
+.map-container{
+  background-color:  #d2d9e0;
+  padding-left: 0%;    
+  text-align: center;    
+  margin-bottom: 30px;
+  width: 75vw;
+}
 
   .top-bar{   
-    background-color: #ffffff;
+    background-color: #d2d9e0;
     padding: 10px;
     text-align: center;
-    width: 100%;
-    position: sticky;
-    top: 0px;
+    width: 100%;    
    
   }
   .menu{
-    color: rgb(0, 0, 0);
+    color: rgb(49, 44, 44);
     text-decoration: none;    
-    font-size: 1.3em;
+    font-size: 2vw;
     display: flex;
     flex-direction: row;
-    
+    padding-top: 20px;
+    font-weight: bold;
    
   }
   .main-menu{
-    margin-right: 50vw;
+    margin-right: 40vw;
     white-space:nowrap;
    
   }
   .menu-btn{
-    font-size: 20px;
+    
     padding-left: 50px;
     padding-bottom: 20px;
     width: 200px;
@@ -47,11 +63,17 @@
     display: inline-flex;
     cursor: pointer;
     position: relative;
+    
 }
-
+label{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .checkbox > span {
     color: #34495E;
     padding: 0.5rem 0.25rem;
+    
 }
 
 .checkbox > input {
@@ -88,9 +110,11 @@
     border: 2px solid #34495E;
 }
 
-.fave-header{
+.fave-header, .main-header{
     font-size: 30px;
+    font-weight: bold;
     text-align: center;
+    color: #16213E;
 }
 .favourite{
     font-size: 15px;
@@ -98,23 +122,13 @@
 }
 
 
-/* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
- #map {
-    height: 30%;
-  }
-  a{
-    text-decoration: none;
-  }
-
   img{
     width: 425px;
     height: 184px;
     object-fit: cover;
   }
   .place-card, .fave-item{
+    background-color: white;
     width: 425px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

@@ -156,6 +156,10 @@ const remove = (location) =>{
   })
     }
  
+    function myFunction(target) {
+      location.replace(`${target}.html`)
+    }
+
 const signOut = () =>{
   document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
   location.replace(`login.html`);

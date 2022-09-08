@@ -14,7 +14,7 @@ const {addFavourite,
     showFitFave,
     showFullFave,
     showFineFave,
-   
+    getUser,
     removeFavourite
 
 } = require('./controller')
@@ -25,6 +25,7 @@ const port = process.env.PORT || 8888;
 app.get("/api/showfitfavourite/:username", showFitFave);
 app.get("/api/showfullfavourite/:username", showFullFave);
 app.get("/api/showfinefavourite/:username", showFineFave);
+app.get("/api/userinfo/:username", getUser);
 app.post(`/api/login`, login)
 app.post(`/api/register`, register)
 app.post("/api/addfavourite", addFavourite);

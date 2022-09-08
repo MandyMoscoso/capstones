@@ -154,6 +154,10 @@ const remove = (location) =>{
 .then(res=>{
     pageStarter();
   })
+    };
+
+    function myFunction(target) {
+      location.replace(`${target}.html`)
     }
  
 const signOut = () =>{

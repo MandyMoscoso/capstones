@@ -6,14 +6,14 @@
     /* The width is the width of the web page */
   /* } */
 html{
-  background-color:#256D85 ;
+  background-color:#4677AC ;
 }
 body{
   
   width: fit-content;
   height: 100vh;
   margin: auto;
-  background-color:#8FE3CF;
+  background-color:#4677AC;
 }
 .container{
   display: flex;

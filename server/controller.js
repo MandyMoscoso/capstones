@@ -14,11 +14,8 @@ const bcrypt = require('bcryptjs');
 
 
 const escapeQuote=(str) =>{
-   return str.replace(`'`, `''`)
+   return str.replaceAll(`'`, `''`)
 }
-
-
-
 
 module.exports = {
   login: (req, res) => {
@@ -153,4 +150,22 @@ module.exports = {
     sequelize.query(`DELETE FROM ${username} WHERE item_id = ${id}`)
     .then (dbRes => res.status(200).send("item removed"))
 },
+
+getUser: (req,res) =>{
+  console.log(req.params)
+  let bodyKeys = Object.keys(req.params);    
+  for(let i of bodyKeys){
+    if((typeof req.params[i]) == 'string'){
+      req.params[i] = escapeQuote(req.params[i])
+    }   
+  }
+  sequelize.query(`SELECT username, firstname, lastname, email FROM users WHERE username = '${req.params.username}'`)
+    .then(dbRes =>{
+      res.status(200).send(dbRes[0]);
+      console.log('res sent')
+    }
+    )
+},
+
+
 }
