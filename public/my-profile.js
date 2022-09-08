@@ -1,3 +1,4 @@
+
 const baseUrl = "http://localhost:8888/";
 
 //function to get the username from cookie
@@ -71,8 +72,14 @@ const submitEdit =(username,item) =>{
     axios.put(`${baseUrl}api/edituser/`,obj). then(res =>{
         document.querySelector('.user-info').innerHTML= "";
         createUserCard(res.data[0])
-
     }
-        )
-    
+        )    
+};
+
+//delete account function
+const deleteUser = (username) =>{
+    axios.delete((`${baseUrl}api/deleteuser/${username}`))
+    .then(res =>{
+        signOut();
+    })
 }

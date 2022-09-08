@@ -168,28 +168,35 @@ getUser: (req,res) =>{
 },
 
 editUser: (req,res) =>{
-  console.log(req.body)
-  
+  // console.log(req.body)  
   let bodyKeys = Object.keys(req.body);    
   for(let i of bodyKeys){
     if((typeof req.body[i]) == 'string'){
       req.body[i] = escapeQuote(req.body[i])
     }   
   }
-
   sequelize.query(`UPDATE users SET ${req.body.item} = '${req.body.newvalue}' WHERE username = '${req.body.username}'`)
-  .then( dbRes =>{
-    if(res.status(200)){
-      sequelize.query(`SELECT username, firstname, lastname, email FROM users WHERE username = '${req.body.username}'`)
-    .then(dbRes =>{
-      res.status(200).send(dbRes[0]);
-      // console.log('res sent')
+    .then( dbRes =>{
+      if(res.status(200)){
+        sequelize.query(`SELECT username, firstname, lastname, email FROM users WHERE username = '${req.body.username}'`)
+      .then(dbRes =>{
+        res.status(200).send(dbRes[0]);
+        // console.log('res sent')
+      }
+      )
+      }    
     }
-    )
-    }
-    
-  }
-
   )
-}
+},
+
+deleteUser: (req,res) =>{  
+  let username = req.params.username;
+  console.log(username)
+  escapeQuote(username);
+  sequelize.query(`DROP TABLE ${username};
+  DELETE FROM users WHERE username = '${username}';`)
+    .then( dbres => res.status(200).send(console.log('user deleted')))
+
+},
+
 }

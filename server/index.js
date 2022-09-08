@@ -16,7 +16,8 @@ const {addFavourite,
     showFineFave,
     getUser,
     removeFavourite,
-    editUser
+    editUser,
+    deleteUser
 
 } = require('./controller')
 
@@ -36,6 +37,8 @@ app.post("/api/addfavourite", addFavourite);
 
 app.put(`/api/removefavourite/`, removeFavourite)
 app.put(`/api/edituser/`, editUser)
+
+app.delete("/api/deleteuser/:username", deleteUser)
 
 
 
