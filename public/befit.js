@@ -71,7 +71,8 @@ function createPlaceCard(place) {
   placeCard.innerHTML = ` <img src= ${placePhotoUrl}>
   <h3 class ="name">${place.name} </h3>
   <p class = "rating">Rating: ${place.rating}  <button class='favourite-button' id=${place.place_id} onclick="addToFavourite('${place.place_id}','${placePhotoUrl}')">Add to Favourite</button type="button"></p>
-  <p class = "address">Address: ${place.formatted_address}</p>`  
+  <p class = "address">Address: ${place.formatted_address}</p>
+  <button class='direction' onclick="directionStart('${place.formatted_address}')">Let's Go</button type="button">`  
   return placeCard
 };
 // this function will be called when the page start. It will check if user logged in. If yes then get favourite places from server and add to html elements
@@ -92,6 +93,7 @@ function pageStarter(){
         placeCard.innerHTML = `<img src= ${data[i].photo}>
         <h3 class="fave-name">${data[i].location_name} </h3>      
         <p class="fave-address">Address: ${data[i].location_address}</p>
+        <button class='direction' onclick="directionStart('${data[i].location_address}')">Let's Go</button type="button">
         <button class='delete' id=${data[i].item_id} onclick="remove('${data[i].item_id}')">Remove from Favourite</button type="button"></p>`          
         myFave.appendChild(placeCard)
         document.querySelector(".fave-header").innerHTML="My Favourite Places"
@@ -152,3 +154,34 @@ signoutBtn.addEventListener('click', signOut)
 
 //call pageStarter to start the page
 pageStarter();
+
+
+const directionStart = (ori) =>{
+  const map = new google.maps.Map(document.getElementById("map"), {
+      // center: new google.maps.LatLng(45.4215296, -75.6971931),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+  });
+  
+  const directionsService = new google.maps.DirectionsService();
+  
+  directionsService.route(
+      {
+              // origin: "272 Bronson Ave, Ottawa, Canada",
+              // destination: "1385 Woodroffe Ave, Nepean, Canada",
+              origin: ori,
+              destination: uluru,
+              travelMode: "DRIVING",
+      },
+      (response, status) => {
+          if (status === "OK") {
+  
+              new google.maps.DirectionsRenderer({
+                  suppressMarkers: true,
+                  directions: response,
+                  map: map,
+                });
+          }
+      }
+  )
+}
