@@ -1,59 +1,64 @@
   body{
-    width: 80vw;
-    margin-left: 10vw;  
-    background-color: #d2d9e0;  
+    width: 80vw;    
+    background-color: #171717;  
+  }
+  main{
+    margin-left:10vw;
   }
   a, a:visited,  a:hover{
     background-color:transparent; 
     text-decoration:none;
-    color: black;
+    color: white;
 }
 .top-container{
-  position: sticky;
-  
+  position: sticky; 
   
 }
 #map {
   height: 30%;  
   align-items: center;
   width: 105%;
+  
 }
 .map-container{
   background-color:  #d2d9e0;
-  padding-left: 0%;    
+  margin-left: 10vw;    
   text-align: center;    
   margin-bottom: 30px;
   width: 75vw;
 }
 
   .top-bar{   
-    background-color: #d2d9e0;
-    padding: 10px;
+    background-color: #171717;    
     text-align: center;
     width: 100%;    
-   
+    color: white;
+    font-size: 20px;
+    padding-left: 10vw;
   }
-  .menu{
-    color: rgb(49, 44, 44);
+  .menu{    
     text-decoration: none;    
     font-size: 2vw;
     display: flex;
     flex-direction: row;
     padding-top: 20px;
-    font-weight: bold;
-   
+    margin-bottom: 5px;    
+    width: 100vw; 
   }
   .main-menu{
     margin-right: 40vw;
     white-space:nowrap;
-   
   }
   .menu-btn{
-    
     padding-left: 50px;
     padding-bottom: 20px;
     width: 200px;
     white-space:nowrap;
+  }
+  .top-divider{
+    border-bottom: 2px solid white; 
+    width: 100vw;
+    margin-bottom: 5px;
   }
   #sign-out{
     margin-right: 20px;
@@ -63,7 +68,6 @@
     display: inline-flex;
     cursor: pointer;
     position: relative;
-    
 }
 label{
   display: flex;
@@ -114,11 +118,12 @@ label{
     font-size: 30px;
     font-weight: bold;
     text-align: center;
-    color: #16213E;
+    color: #d6d9e2;
 }
 .favourite{
     font-size: 15px;
     text-align: center;
+    
 }
 
 

@@ -22,7 +22,7 @@ const register = body => axios.post(`${baseURL}/register`, body).then(res => {
   registerSuccess(res.data)
 }).catch(err => {
   // console.log(err)
-  alert('Uh oh. Your request did not work.')
+  alert('Please try again.')
 })
 
 function loginSubmitHandler(e) {

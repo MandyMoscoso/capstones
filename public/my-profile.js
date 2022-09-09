@@ -46,7 +46,7 @@ const createUserCard = (user) => {
  <p class='edit' onclick="editUser('${user.username}','email')">Edit</p>
  </div>
 
- <button class='delete' onclick="deleteUser('${user.username}')">Delete User</button>`
+ <button class='delete' onclick="deleteUser('${user.username}')">Delete Account</button>`
   return document.querySelector('.user-info').appendChild(userInfo)
 };
 

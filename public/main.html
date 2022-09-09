@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main.css">
     <title>BFFS Main Menu</title>
 </head>
 <body >
@@ -14,11 +14,21 @@
     </nav>
     <div class="container">
         <div class = "fit" onclick="myFunction('befit')">
-            <div class = "text">BE FIT</div></a></div>
+            <div class ='img-container'><img src="./img/blue-geometric-woman-running-illustration/1608.m00.i125.n001.P.c25.412978636 Active running woman vector illustration. Energy jogging woman design.jpg" alt="" class="fit-img"></div>
+            
+            <div class = "text">
+                <svg xmlns="http://www.w3.org/2000/svg">                 
+                  <filter id="motion-blur-filter" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
+                  </filter>
+                </svg>              
+                <span filter-content="S">BE FIT</span></div></a></div>
         <div class = "full" onclick="myFunction('befull')">
-            <div class = "text">BE FULL</div>
+            <div class="img-container"><img src="https://images.pexels.com/photos/1833337/pexels-photo-1833337.jpeg?auto=compress&cs=tinysrgb&w=400" alt="" class="fit-img"></div>            
+            <div class = "text" id="full-text">BE FULL</div>
             </div>
-        <div class = "fine" onclick="myFunction('befine')"><div class = "text">BE FINE</div></div>
+        <div class = "fine" onclick="myFunction('befine')">
+            <div class="img-container"><img src="./img/red-medical-heartbeat-line-vector-heart-shape-graphic-health-charity-concept/tp227-06.jpg" alt="" class="fit-img"></div>
+            <div class = "text" id="fine-text">BE FINE</div></div>
     </div>
     
 </body>
