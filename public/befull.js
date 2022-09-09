@@ -47,7 +47,7 @@ function initialize(uluru) {
 
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
+    for (var i = 0; i < results.length || i<5; i++) {
       var place = results[i];
       // console.log( place.photos[0].getUrl({maxWidth:640}))
       if(checkBox.checked === true){

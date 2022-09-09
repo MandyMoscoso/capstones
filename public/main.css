@@ -87,10 +87,13 @@ body{
   }
 
 .menu{
-    color: white;
+    color: rgb(255,255,237);
     font-size: 20px;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid rgb(255,255,237);
+    padding-bottom: 20px;
 }
 .menu-btn{
   padding-left: 40px;

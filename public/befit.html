@@ -1,8 +1,8 @@
 <html>
   <head>
     <title>Nearest Hiking Trails</title>
-    <link rel="stylesheet" type="text/css" href="./befit.css" />
-    
+    <link rel="stylesheet" type="text/css" href="./befit.css" />   
+    <script src="./map.js"></script> 
   </head>
   <body>
     <div class = 'top-container'>
@@ -12,7 +12,8 @@
           <span class = "menu-btn" id="my-profile" onclick="myFunction('my-profile')">My Profile</span>
         <span class="menu-btn" id ="sign-out">Sign Out</span>
       </div>
-    </div>       
+    </div> 
+
     <div class="top-divider"></div>
     <div class = 'map-container'><div id="map"></div></div>
   </div>    
@@ -24,15 +25,16 @@
         <input type="checkbox" class="checkbox"/>
         <span>Only shows open now</span>
     </label>
-    <div class = "places-container"></div>
+    <div class = "places-container"> </div>
   </main>
-    
-       
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAypU-YlcxOnjjKku11CCYpTiOoDBg1qaM&libraries=places&v=weekly"
+  
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script src="./map.js"></script> -->
+
+<script src="./befit.js"></script>
+<!-- <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCevz5I6dUNjY_w9ZotJQMngHJ2LGBtFYU&libraries=places&v=weekly"
       defer
-    ></script>
-    <script src="./befit.js"></script>
+    ></script> -->
 </body>
 </html>

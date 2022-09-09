@@ -1,8 +1,8 @@
 <html>
   <head>
     <title>Nearest Pharmacies</title>
-    <link rel="stylesheet" type="text/css" href="./befit.css" />
-    
+    <link rel="stylesheet" type="text/css" href="./befit.css" />   
+    <script src="./map.js"></script>  
   </head>
   <body>
     <div class = 'top-container'>
@@ -12,13 +12,12 @@
           <span class = "menu-btn" id="my-profile" onclick="myFunction('my-profile')">My Profile</span>
         <span class="menu-btn" id ="sign-out">Sign Out</span>
       </div>
-    </div>       
+    </div> 
+
+    <div class="top-divider"></div>      
     <div class = 'map-container'><div id="map"></div></div>
-  </div>
-    
-    
-    <!--The div element for the map -->
-    
+  </div>  
+  <main>
     <div class = 'fave-header'></div>
     <div class = 'favourite'></div>
     <h3 class="main-header">Nearest Pharmacies</h3>
@@ -30,13 +29,10 @@
 
 
     <div class = "places-container"></div>
-
-    <a href="./login.html">Back to Main page</a>    
+  </main>  
+       
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAypU-YlcxOnjjKku11CCYpTiOoDBg1qaM&libraries=places&v=weekly"
-      defer
-    ></script>
+   
     <script src="./befine.js"></script>
 </body>
 </html>
