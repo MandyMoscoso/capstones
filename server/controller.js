@@ -54,6 +54,12 @@ module.exports = {
         req.body[i] = escapeQuote(req.body[i])
       }   
     }
+        sequelize.query(`SELECT * FROM users WHERE username ='${username}'
+          `).then(dbRes =>{
+            if(dbRes[0].length != 0){
+              res.send("Username unvailable")
+            }
+            else{              
           sequelize.query(`CREATE TABLE ${username} (
             item_id SERIAL PRIMARY KEY,
             location_name VARCHAR,
@@ -66,9 +72,11 @@ module.exports = {
           sequelize.query(`INSERT INTO users (username, password, email, firstname, lastname)
           VALUES ('${username}', '${passHash}','${email}', '${firstName}', '${lastName}')`)
           .then(dbRes =>{
-            
-            res.status(200).send({firstName,lastName})
-          })             
+                res.status(200).send({firstName,lastName})
+          })  
+            }
+          })
+           
             },
 
   addFavourite:(req,res) =>{

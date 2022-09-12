@@ -142,16 +142,21 @@ const addToFavourite = (id,photo) =>{
   .then(res=>{
       pageStarter();
     })
+  .catch(err => {
+    alert('Please try again.')
+  })
       }
     }      
 };
 
-//function to delete a place from favourite
 const remove = (location) =>{  
   let username = getCookie('username') 
         axios.put(`${baseUrl}api/removefavourite/`,{id: location, username: username} )
 .then(res=>{
     pageStarter();
+  })
+.catch(err => {
+    alert('Please try again.')
   })
 }
 //function to redirect to new page

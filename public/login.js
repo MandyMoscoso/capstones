@@ -17,12 +17,14 @@ const login = body => axios.post(`${baseURL}/login`, body).then( res => {
   console.log(err)
   alert('Please check your username and password')
 })
-const register = body => axios.post(`${baseURL}/register`, body).then(res => {
-  // console.log("registered")
-  registerSuccess(res.data)
+const register = body => axios.post(`${baseURL}/register`, body).then(res => { 
+  if(res.data ==='Username unvailable'){
+    alert('Username unavailable')
+  }else{
+    registerSuccess(res.data)
+  }
 }).catch(err => {
-  // console.log(err)
-  alert('Please try again.')
+  alert('Server error. Please try again.')
 })
 
 function loginSubmitHandler(e) {
