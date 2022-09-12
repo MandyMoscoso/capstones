@@ -15,30 +15,30 @@ const bcrypt = require('bcryptjs');
 
 const escapeQuote=(str) =>{
    return str.replaceAll(`'`, `''`)
-}
+};
 
+// all function to export to index.js
 module.exports = {
-  login: (req, res) => {
-    console.log('Logging In User')
-   
-    console.log(req.body)
+  login: (req, res) => {   
     const { username, password } = req.body;
     let users = [];
     sequelize.query(`select * from users`)
           .then((dbRes) => {
-              console.log(dbRes[0]);
+              // console.log(dbRes[0]);
               users = dbRes[0]
               for (let i = 0; i < users.length; i++) {                
-                if (users[i].username == username && bcrypt.compareSync(password, users[i].password)) {                                
-                  return res.status(200).send(users[i].username)
+                if (users[i].username == username && bcrypt.compareSync(password, users[i].password)) {  
+                  let result = {
+                    username: users[i].username,
+                    firstname: users[i].firstname,
+                    lastname: users[i].lastname
+                  }                              
+                  // console.log(result)
+                  return res.status(200).send(result)
                 }
               }
-              res.status(400).send("User not found.")
-              
-          });
-      
-    
-    
+              res.status(400).send("User not found.")              
+          });       
   },
   register: (req, res) => {
       console.log('Registering User')
@@ -62,16 +62,13 @@ module.exports = {
             opening_hrs VARCHAR,            
             category VARCHAR,
             photo VARCHAR,
-            username VARCHAR  REFERENCES users (username)
-            
-        );`);
+            username VARCHAR  REFERENCES users (username));`);
           sequelize.query(`INSERT INTO users (username, password, email, firstname, lastname)
           VALUES ('${username}', '${passHash}','${email}', '${firstName}', '${lastName}')`)
           .then(dbRes =>{
             
             res.status(200).send({firstName,lastName})
-          })
-             
+          })             
             },
 
   addFavourite:(req,res) =>{
@@ -134,7 +131,6 @@ module.exports = {
         res.status(200).send(dbRes[0]);
         console.log('res sent')
       }
-
       )
   },
    removeFavourite : (req,res)=>{        
@@ -152,7 +148,6 @@ module.exports = {
 },
 
 getUser: (req,res) =>{
-  // console.log(req.params)
   let bodyKeys = Object.keys(req.params);    
   for(let i of bodyKeys){
     if((typeof req.params[i]) == 'string'){
@@ -196,7 +191,6 @@ deleteUser: (req,res) =>{
   sequelize.query(`DROP TABLE ${username};
   DELETE FROM users WHERE username = '${username}';`)
     .then( dbres => res.status(200).send(console.log('user deleted')))
-
 },
 
 }

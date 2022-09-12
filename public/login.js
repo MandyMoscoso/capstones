@@ -56,7 +56,6 @@ function registerSubmitHandler(e) {
     alert("Your passwords need to match.")
     return
   }
-
   let bodyObj = {
       username: username.value,
       email: email.value,
@@ -64,9 +63,7 @@ function registerSubmitHandler(e) {
       lastName: lastName.value,
       password: password.value
   }
-
   register(bodyObj)
-
   username.value = ''
   email.value = ''
   firstName.value = ''
@@ -81,8 +78,10 @@ function registerSuccess(data) {
     document.querySelector("#register-form").remove()
 }
 
-function loginSuccess(data) {
-  document.cookie = `username=${data}`;
+function loginSuccess(data) {  
+  document.cookie = `username=${data.username}`;
+  document.cookie = `firstname=${data.firstname}`;
+  document.cookie = `lastname=${data.lastname}`
   location.replace(`main.html`)
 }
 function myFunction(target) {

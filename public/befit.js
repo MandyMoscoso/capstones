@@ -46,7 +46,7 @@ function initialize(uluru) {
 
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length || i< 5; i++) {
+    for (var i = 0; i < results.length; i++) {
       var place = results[i];
       // console.log( place.photos[0].getUrl({maxWidth:640}))
       if(checkBox.checked === true){
@@ -77,6 +77,19 @@ function createPlaceCard(place) {
 };
 // this function will be called when the page start. It will check if user logged in. If yes then get favourite places from server and add to html elements
 function pageStarter(){  
+  let firstname = getCookie('firstname');
+  let lastname = getCookie('lastname');
+  let user = "Welcome back,<br> "+firstname + " " + lastname;
+  // console.log(user)
+  document.createElement('div')
+  document.querySelector('.name')
+
+  let userCard = document.createElement('div');
+        document.querySelector(".user").innerHTML=""
+        userCard.classList.add('name');
+        userCard.innerHTML = user ;
+        console.log(userCard)    
+        document.querySelector(".user").appendChild(userCard)
   let username = getCookie('username')
   if(username==undefined){   
     myFave.innerHTML = "Please log in";
@@ -148,6 +161,8 @@ function myFunction(target) {
 //function to sign out and add event listener to signout. can switch to onclick on html to avoid using addEventlisterner
 const signOut = () =>{
   document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "lastname=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
   location.replace(`login.html`);
 }
 signoutBtn.addEventListener('click', signOut)

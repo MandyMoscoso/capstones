@@ -5,29 +5,29 @@
     <script src="./map.js"></script> 
   </head>
   <body>
-    <div class = 'top-container'>
-      <div class ='top-bar'> 
-        <div class = 'menu'>
-          <span> <a class = "main-menu" href="main.html">Main Menu</a> </span>
-          <span class = "menu-btn" id="my-profile" onclick="myFunction('my-profile')">My Profile</span>
-        <span class="menu-btn" id ="sign-out">Sign Out</span>
-      </div>
-    </div> 
-
-    <div class="top-divider"></div>
+    <div class = 'menu'>
+			<div class="menu-btn">
+				<div class = 'user'></div>
+				
+			</div>        
+          <div class = "main-menu" onclick="myFunction('main')"> Main Menu </div>          
+          <div class = "menu-btn" id="my-profile" onclick="myFunction('my-profile')">My Profile</div>
+        <div class="menu-btn" id ="sign-out">Sign Out</div>
+      </div> 
+	  <main>
     <div class = 'map-container'><div id="map"></div></div>
-  </div>    
-  <main>
-    <div class = 'fave-header'></div>
-    <div class = 'favourite'></div>
-    <h3 class="main-header">Nearest Hiking Trails</h3>
-    <label >
-        <input type="checkbox" class="checkbox"/>
-        <span>Only shows open now</span>
-    </label>
-    <div class = "places-container"> </div>
-  </main>
-  
+	<div class="all-places">
+		<div class = 'fave-header'></div>
+		<div class = 'favourite'>	
+		</div>
+		<h3 class="main-header">Nearest Hiking Trails</h3>
+		<label >
+			<input type="checkbox" class="checkbox"/>
+			<span>Only shows open now</span>
+		</label>
+		<div class = "places-container"> </div>
+	</div>    
+  </main>  
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- <script src="./map.js"></script> -->
 

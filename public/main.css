@@ -100,5 +100,9 @@ body{
   padding-top:20px
 }
 #my-profile{
-  padding-left: 80%
+  padding-left: 65%
+}
+.name{
+  margin-left: 40px;
+  width: 300px;
 }

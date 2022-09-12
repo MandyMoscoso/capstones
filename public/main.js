@@ -105,7 +105,34 @@ if(registerForm){
 }
 // ------------------------------------------------------------------------------
 
+
+// ------------------------------------------------------------------------------
+
 const signOut = () =>{
   document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "lastname=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
   location.replace(`login.html`);
 }
+
+
+// get firstname and last name from cookie
+const getCookie = (name)=> {
+  var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  if (match) return match[2];
+};
+const pageStarter = () =>{
+  let firstname = getCookie('firstname');
+  let lastname = getCookie('lastname');
+  let user = "Welcome back, "+firstname + " " + lastname;
+  console.log(user)
+  document.createElement('div')
+  document.querySelector('.name')
+
+  let userCard = document.createElement('div');
+        userCard.classList.add('name')
+        userCard.textContent = user ;
+        console.log(userCard)    
+        document.querySelector(".user").appendChild(userCard)
+};
+pageStarter();
