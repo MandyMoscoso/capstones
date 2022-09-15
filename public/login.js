@@ -1,8 +1,3 @@
-// less
-
-
-//functions
-// functions for log in page
 const logIn = document.querySelector('.log-in')
 const loginForm = document.querySelector('#login-form')
 const registerForm = document.querySelector('#register-form')
@@ -10,8 +5,7 @@ let userid = '';
 const signoutBtn = document.querySelector('#sign-out')
 const baseURL = `http://localhost:8888/api`
 
-const login = body => axios.post(`${baseURL}/login`, body).then( res => {  
-  // console.log(res.data)
+const login = body => axios.post(`${baseURL}/login`, body).then( res => {   
   loginSuccess(res.data)
 }).catch(err => {
   console.log(err)
@@ -29,31 +23,25 @@ const register = body => axios.post(`${baseURL}/register`, body).then(res => {
 
 function loginSubmitHandler(e) {
     e.preventDefault()
-    // console.log('login clicked')
     let username = document.querySelector('#login-username')
     let password = document.querySelector('#login-password')
-
     let bodyObj = {
         username: username.value,
         password: password.value
     }
-
     login(bodyObj)
-
     username.value = ''
     password.value = ''
-}
+};
 
 function registerSubmitHandler(e) {
-  e.preventDefault()
-
+  e.preventDefault();
   let username = document.querySelector('#register-username')
   let email = document.querySelector('#register-email')
   let firstName = document.querySelector('#register-firstName')
   let lastName = document.querySelector('#register-lastName')
   let password = document.querySelector('#register-password')
   let password2 = document.querySelector('#register-password-2')
-
   if (password.value !== password2.value) {
     alert("Your passwords need to match.")
     return
@@ -66,39 +54,41 @@ function registerSubmitHandler(e) {
       password: password.value
   }
   register(bodyObj)
-  username.value = ''
-  email.value = ''
-  firstName.value = ''
-  lastName.value = ''
-  password.value = ''
-  password2.value = ''
-}
+    username.value = ''
+    email.value = ''
+    firstName.value = ''
+    lastName.value = ''
+    password.value = ''
+    password2.value = ''
+};
 
 function registerSuccess(data) {
-  document.querySelector('h1').innerHTML = `<p class = "welcome" >Welcome ${data.firstName} ${data.lastName}`
-    // document.querySelector("#register-form").innerHTML = ''
-    document.querySelector("#register-form").remove()
-}
+  document.querySelector('h1').innerHTML = `<p class = "welcome" >Welcome ${data.firstName} ${data.lastName}`  
+  document.querySelector("#register-form").remove()
+};
 
 function loginSuccess(data) {  
   document.cookie = `username=${data.username}`;
   document.cookie = `firstname=${data.firstname}`;
   document.cookie = `lastname=${data.lastname}`
   location.replace(`main.html`)
-}
+};
+
 function myFunction(target) {
   location.replace(`${target}.html`)
-}
+};
+
 if(loginForm){
   loginForm.addEventListener('submit', loginSubmitHandler)
-}
+};
 if(registerForm){
   registerForm.addEventListener('submit', registerSubmitHandler)
-}
-// ------------------------------------------------------------------------------
+};
 
 const signOut = () =>{
   document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "lastname=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
   location.replace(`login.html`);
 }
 

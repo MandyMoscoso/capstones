@@ -4,15 +4,11 @@ const signoutBtn = document.querySelector('#sign-out')
 const placesContainer = document.querySelector('.places-container')
 const checkBox=document.querySelector('.checkbox')
 const favouriteBtn ={}
-//baseurl - switch when deploy to heroku
 const baseUrl = "http://localhost:8888/";
-//default location when user doesn't allow access to location
 const uluru = { lat: -25.344, lng: 131.031 };
-//Maps API for nearby place - function
 const nearBy = () =>{
 placesContainer.innerHTML=""
 if (window.navigator.geolocation) {
-  // Geolocation available    
   navigator.geolocation.getCurrentPosition(function (position) {  
       uluru.lat = position.coords.latitude;
       uluru.lng = position.coords.longitude;
@@ -20,7 +16,7 @@ if (window.navigator.geolocation) {
   });
 } else (initialize(uluru))
 };
-//Maps API function to start map
+
 function initialize(uluru) {
   var map;
   var service;
@@ -33,11 +29,10 @@ function initialize(uluru) {
   var request = {
     location: pyrmont,
     radius: '10',
-    query: 'restaurants'
+    query: 'restaurant'
   };
   service = new google.maps.places.PlacesService(map);
   service.textSearch(request, callback);
-  //function to put marker on map
   const marker = new google.maps.Marker({
     position: uluru,
     map: map,
@@ -48,8 +43,7 @@ function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
-      // console.log( place.photos[0].getUrl({maxWidth:640}))
-      if(checkBox.checked === true){
+          if(checkBox.checked === true){
         if(place.business_status =='OPERATIONAL' && place.opening_hours!=undefined && place.opening_hours.isOpen){         
             placesContainer.appendChild((createPlaceCard(place)))  ;}
         } else{
@@ -60,7 +54,7 @@ function callback(results, status) {
     }
   }
 }
-//create new place from nearby Maps APM. this is different from favourite place cards receive from server
+
 function createPlaceCard(place) {  
   let placeCard = document.createElement('div');
   placeCard.classList.add('place-card')
@@ -75,15 +69,13 @@ function createPlaceCard(place) {
   <button class='direction' onclick="directionStart('${place.formatted_address}')">Let's Go</button type="button">`  
   return placeCard
 };
-// this function will be called when the page start. It will check if user logged in. If yes then get favourite places from server and add to html elements
+
 function pageStarter(){  
   let firstname = getCookie('firstname');
   let lastname = getCookie('lastname');
   let user = "Welcome back,<br> "+firstname + " " + lastname;
-  // console.log(user)
   document.createElement('div')
   document.querySelector('.name')
-
   let userCard = document.createElement('div');
         document.querySelector(".user").innerHTML=""
         userCard.classList.add('name')
@@ -115,14 +107,11 @@ function pageStarter(){
     .then(nearBy()) 
   }
 };
-//if checkbox was clicked, it will call nearby function to get data and display correct places
 checkBox.addEventListener('click', nearBy);
-//get username from browser cookie - can be implemented after learning how to use Java - for more secure validation
 const getCookie = (name)=> {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
   if (match) return match[2];
 };
-//function to add a place to favourite
 const addToFavourite = (id,photo) =>{      
     console.log(id)
     let request = {
@@ -146,7 +135,6 @@ const addToFavourite = (id,photo) =>{
     }      
 };
 
-//function to delete a place from favourite
 const remove = (location) =>{  
   let username = getCookie('username') 
         axios.put(`${baseUrl}api/removefavourite/`,{id: location, username: username} )
@@ -154,11 +142,11 @@ const remove = (location) =>{
     pageStarter();
   })
 }
-//function to redirect to new page
+
 function myFunction(target) {
       location.replace(`${target}.html`)
     }
-//function to sign out and add event listener to signout. can switch to onclick on html to avoid using addEventlisterner
+
 const signOut = () =>{
   document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
   document.cookie = "firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -167,13 +155,10 @@ const signOut = () =>{
 }
 signoutBtn.addEventListener('click', signOut)
 
-//call pageStarter to start the page
 pageStarter();
-
 
 const directionStart = (ori) =>{
   const map = new google.maps.Map(document.getElementById("map"), {
-      // center: new google.maps.LatLng(45.4215296, -75.6971931),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
   });
@@ -181,16 +166,12 @@ const directionStart = (ori) =>{
   const directionsService = new google.maps.DirectionsService();
   
   directionsService.route(
-      {
-              // origin: "272 Bronson Ave, Ottawa, Canada",
-              // destination: "1385 Woodroffe Ave, Nepean, Canada",
-              origin: ori,
-              destination: uluru,
-              travelMode: "DRIVING",
+      { origin: ori,
+        destination: uluru,
+        travelMode: "DRIVING",
       },
       (response, status) => {
-          if (status === "OK") {
-  
+          if (status === "OK") {  
               new google.maps.DirectionsRenderer({
                   suppressMarkers: true,
                   directions: response,

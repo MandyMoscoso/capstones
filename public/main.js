@@ -1,13 +1,11 @@
-// functions for log in page
+
 const logIn = document.querySelector('.log-in')
 const loginForm = document.querySelector('#login-form')
 const registerForm = document.querySelector('#register-form')
 let userid = '';
 const signoutBtn = document.querySelector('#sign-out')
 const baseURL = `http://localhost:8888/api`
-
 const login = body => axios.post(`${baseURL}/login`, body).then( res => {  
-  // console.log(res.data)
   loginSuccess(res.data)
 }).catch(err => {
   console.log(err)
@@ -23,36 +21,29 @@ const register = body => axios.post(`${baseURL}/register`, body).then(res => {
 
 function loginSubmitHandler(e) {
     e.preventDefault()
-
     let username = document.querySelector('#login-username')
     let password = document.querySelector('#login-password')
-
     let bodyObj = {
         username: username.value,
         password: password.value
     }
-
     login(bodyObj)
-
     username.value = ''
     password.value = ''
-}
+};
 
 function registerSubmitHandler(e) {
   e.preventDefault()
-
   let username = document.querySelector('#register-username')
   let email = document.querySelector('#register-email')
   let firstName = document.querySelector('#register-firstName')
   let lastName = document.querySelector('#register-lastName')
   let password = document.querySelector('#register-password')
   let password2 = document.querySelector('#register-password-2')
-
   if (password.value !== password2.value) {
     alert("Your passwords need to match.")
     return
   }
-
   let bodyObj = {
       username: username.value,
       email: email.value,
@@ -60,9 +51,7 @@ function registerSubmitHandler(e) {
       lastName: lastName.value,
       password: password.value
   }
-
   register(bodyObj)
-
   username.value = ''
   email.value = ''
   firstName.value = ''
@@ -77,8 +66,7 @@ function registerSuccess(data) {
 }
 
 function loginSuccess(data) {
-  document.cookie = `username=${data}`;
-  
+  document.cookie = `username=${data}`;  
   logIn.innerHTML = ''
   const newLogIn = document.createElement('div')  
   newLogIn.innerHTML = `
@@ -103,10 +91,6 @@ if(loginForm){
 if(registerForm){
   registerForm.addEventListener('submit', registerSubmitHandler)
 }
-// ------------------------------------------------------------------------------
-
-
-// ------------------------------------------------------------------------------
 
 const signOut = () =>{
   document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -115,8 +99,6 @@ const signOut = () =>{
   location.replace(`login.html`);
 }
 
-
-// get firstname and last name from cookie
 const getCookie = (name)=> {
   var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
   if (match) return match[2];
@@ -128,7 +110,6 @@ const pageStarter = () =>{
   console.log(user)
   document.createElement('div')
   document.querySelector('.name')
-
   let userCard = document.createElement('div');
         userCard.classList.add('name')
         userCard.textContent = user ;

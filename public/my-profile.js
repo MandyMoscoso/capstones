@@ -1,35 +1,24 @@
 
 const baseUrl = "http://localhost:8888/";
-
-//function to get the username from cookie
-
 const getCookie = (name)=> {
     var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
     if (match) return match[2];
 };
 let username = getCookie('username')
 
-//page starter
 const getUserInfo = async (username) =>{
-
     await axios.get(`${baseUrl}api/userinfo/${username}`)
      .then(res =>{
         createUserCard(res.data[0])
     })
     .catch(function (error) {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
+        if (error.response) {         
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
+        } else if (error.request) {        
           console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
+        } else {         
           console.log('Error', error.message);
         }
         console.log(error.config);
@@ -37,14 +26,13 @@ const getUserInfo = async (username) =>{
 } ;
 getUserInfo(username)
 
-// signout function
 const signOut = () =>{
-    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-    location.replace(`login.html`);
-  };
+  document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "lastname=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  location.replace(`login.html`);
+}
 
-
-// setting up user card function
 const createUserCard = (user) => {
  let userInfo = document.createElement('div');
  userInfo.classList.add('user-profile')
@@ -53,22 +41,18 @@ const createUserCard = (user) => {
  <p class ="info">Firstname: ${user.firstname} </p>
  <p class='edit' onclick="editUser('${user.username}','firstname')">Edit</p>
  </div>
-
  <div class ='info-container' id ='lastname'>
  <p class ="info">Lastname: ${user.lastname} </p>
  <p class='edit' onclick="editUser('${user.username}','lastname')">Edit</p>
  </div>
-
  <div class ='info-container' id ='email'>
  <p class ="info">Email:   ${user.email} </p>
  <p class='edit' onclick="editUser('${user.username}','email')">Edit</p>
  </div>
-
  <button class='delete' onclick="deleteUser('${user.username}')">Delete Account</button>`
   return document.querySelector('.user-info').appendChild(userInfo)
 };
 
-//edit info function
 const editUser= (username,item) => {
     console.log("edit clicked main.js", username);
     const editForm = document.createElement("form");
@@ -80,24 +64,47 @@ const editUser= (username,item) => {
 
 const submitEdit =(username,item) =>{
     const formInput = document.querySelector(".edit-form").value;
-    // console.log(username,item, formInput)
     let obj = {
         username,
         item,
         newvalue: formInput
     }
     console.log(obj)
-    axios.put(`${baseUrl}api/edituser/`,obj). then(res =>{
+    axios.put(`${baseUrl}api/edituser/`,obj)
+    .then(res =>{
         document.querySelector('.user-info').innerHTML= "";
         createUserCard(res.data[0])
     }
-        )    
+        ) 
+    .catch(function (error) {
+        if (error.response) {         
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {        
+          console.log(error.request);
+        } else {         
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      });   
 };
 
-//delete account function
 const deleteUser = (username) =>{
     axios.delete((`${baseUrl}api/deleteuser/${username}`))
     .then(res =>{
         signOut();
     })
+    .catch(function (error) {
+      if (error.response) {         
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {        
+        console.log(error.request);
+      } else {         
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
+    });
 }
